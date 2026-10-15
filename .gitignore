@@ -1,3 +1,5 @@
 src/**/bin/
 src/**/obj/
 dist/
+/PATCH_NOTES*.md
+/RELEASE_NOTES*.md

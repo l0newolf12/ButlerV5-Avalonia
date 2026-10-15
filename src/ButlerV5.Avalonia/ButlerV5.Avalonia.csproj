@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ButlerV5 Avalonia</AssemblyName>
+    <RootNamespace>ButlerV5</RootNamespace>
+    <Version>1.2.6</Version>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- Keep the release DLL free of machine-specific PDB paths. -->
+    <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
+    <SkuaAvaloniaBuild Condition="'$(SkuaAvaloniaBuild)' == ''">$(SKUA_AVALONIA_BUILD)</SkuaAvaloniaBuild>
+    <SkuaAssemblies>$(SkuaAvaloniaBuild)\Assemblies</SkuaAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Skua.Core.Interfaces">
+      <HintPath>$(SkuaAssemblies)\Skua.Core.Interfaces.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Core.Models">
+      <HintPath>$(SkuaAssemblies)\Skua.Core.Models.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Core.Utils">
+      <HintPath>$(SkuaAssemblies)\Skua.Core.Utils.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Core">
+      <HintPath>$(SkuaAssemblies)\Skua.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Avalonia.Base">
+      <HintPath>$(SkuaAssemblies)\Avalonia.Base.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Avalonia.Controls">
+      <HintPath>$(SkuaAssemblies)\Avalonia.Controls.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="ValidateSkuaAvaloniaBuild" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(SkuaAssemblies)\Skua.Core.Interfaces.dll')"
+           Text="Skua Avalonia assemblies were not found at '$(SkuaAssemblies)'. Set SkuaAvaloniaBuild to the Avalonia Build directory." />
+  </Target>
+
+</Project>

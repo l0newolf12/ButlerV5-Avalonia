@@ -10,6 +10,7 @@ Avalonia test builds used a separate numbering sequence.
 - The roster now shows each account's currently equipped class beside its map and server, and refreshes when the class changes.
 - Both editions publish the class name through the shared `character_locations` sync file. Accounts running an older version remain visible without a class label.
 - Class sampling runs every two seconds rather than on every 250 ms location poll, avoiding repeated inventory reads.
+- Build output in `dist/` is no longer tracked in Git. The build script still produces the ready-to-install DLL there for release distribution.
 
 ### Validation
 

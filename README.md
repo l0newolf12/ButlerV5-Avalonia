@@ -2,6 +2,9 @@
 
 Current public version: **1.2.6**, matching ButlerV5 for WPF.
 
+Download the compiled DLL from [GitHub Releases](https://github.com/l0newolf12/ButlerV5-Avalonia/releases).
+Local builds write to `dist/`, which is excluded from Git.
+
 This is the Avalonia-native port of [ButlerV5](https://github.com/l0newolf12/ButlerV5) for the supplied VibeSkua/Skua Avalonia
 test build. It keeps the original follow, summon, sync-file, combat, quest-bypass,
 quest-clone, parking, class, AntiLag, and logging behavior while replacing all WPF UI

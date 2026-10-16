@@ -1,6 +1,6 @@
 # ButlerV5 Avalonia
 
-Current public version: **1.2.6**, matching ButlerV5 for WPF.
+Current public version: **1.2.7**, matching ButlerV5 for WPF.
 
 Download the compiled DLL from [GitHub Releases](https://github.com/l0newolf12/ButlerV5-Avalonia/releases).
 Local builds write to `dist/`, which is excluded from Git.
@@ -15,6 +15,8 @@ The Avalonia and original ButlerV5 editions intentionally use the same
 can see one another. Do not load both plugin DLLs in the same Skua process.
 The roster shows each account's equipped class beside its map and server when the
 account publishes `class=`; older plugin versions simply omit the class label.
+Messages sent to Skua's scripting log use anonymous account roles and counts.
+ButlerV5's own debug viewer, saved logs, and exports retain names for diagnostics.
 Each location file now includes `offgoto=1` while the account's AQW **Enable Goto**
 preference is off (`offgoto=0` otherwise). Both editions read the flag and join
 the master's map-room directly when goto is disabled.

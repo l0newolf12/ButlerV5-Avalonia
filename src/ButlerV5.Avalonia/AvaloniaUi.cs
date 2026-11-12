@@ -1,6 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Media;
+using Avalonia.Platform;
+using Avalonia.Styling;
+using Skua.Shared.Avalonia.Controls.Shell;
 
 namespace ButlerV5;
 
@@ -25,6 +29,24 @@ internal static class AvaloniaUi
     {
         window.Background = Background;
         window.Classes.Add("skua");
+        // Use VibeSkua's own title bar instead of the OS one, like the client's other windows.
+        window.SystemDecorations = SystemDecorations.BorderOnly;
+        window.ExtendClientAreaToDecorationsHint = true;
+        window.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
+        window.ExtendClientAreaTitleBarHeightHint = 32;
+    }
+
+    /// <summary>Sets the window content under a VibeSkua title bar showing the window's title.</summary>
+    public static void SetContent(Window window, Control content)
+    {
+        Grid root = new() { RowDefinitions = new RowDefinitions("Auto,*") };
+        root.Children.Add(new WindowTitleBar { TitleText = window.Title ?? "ButlerV5" });
+        Grid.SetRow(content, 1);
+        root.Children.Add(content);
+
+        Border frame = new() { BorderThickness = new Thickness(1), Child = root };
+        frame.Bind(Border.BorderBrushProperty, frame.GetResourceObservable("SkuaBorderBrush"));
+        window.Content = frame;
     }
 
     public static TextBlock TextBlock(double size, IBrush? foreground = null) => new()
@@ -48,10 +70,24 @@ internal static class AvaloniaUi
             button.Background = color;
             button.BorderBrush = color;
             button.Foreground = White;
+            // The shared skua-button hover/pressed styles repaint the presenter grey; keep the colour and dim it instead.
+            button.Styles.Add(ColouredState(":pointerover", color, 0.85));
+            button.Styles.Add(ColouredState(":pressed", color, 0.7));
         }
         button.Click += (_, _) => onClick();
         return button;
     }
+
+    private static Style ColouredState(string pseudoClass, IBrush color, double opacity) => new(x => x.OfType<Button>().Class(pseudoClass).Template().OfType<ContentPresenter>().Name("PART_ContentPresenter"))
+    {
+        Setters =
+        {
+            new Setter(ContentPresenter.BackgroundProperty, color),
+            new Setter(ContentPresenter.BorderBrushProperty, color),
+            new Setter(ContentPresenter.ForegroundProperty, White),
+            new Setter(Visual.OpacityProperty, opacity)
+        }
+    };
 
     public static void SetToolTip(Control control, string text) => ToolTip.SetTip(control, text);
 }

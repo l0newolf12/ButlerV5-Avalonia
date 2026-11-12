@@ -1,0 +1,947 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skua.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Skua.Core.Compiler">
+            <summary>
+            "Slightly" modified compiler based on Westwind.Scripting (https://github.com/RickStrahl/Westwind.Scripting)
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Compiler.CompileClass(System.String,System.Nullable{System.Int32},Skua.Core.ScriptLoadContext,System.String)">
+             <summary>
+             This method compiles a class and hands back a
+             dynamic reference to that class that you can
+             call members on.
+            
+             Must have include parameterless ctor()
+             </summary>
+             <param name="code">Fully self-contained C# class</param>
+             <param name="cacheHash">Optional hash for disk cache lookup</param>
+             <param name="loadContext">Optional AssemblyLoadContext for loading the assembly</param>
+             <param name="scriptName">Optional script name for cache file naming</param>
+             <returns>Instance of that class or null</returns>
+        </member>
+        <member name="M:Skua.Core.Compiler.CompileClassToType(System.String,System.Nullable{System.Int32},Skua.Core.ScriptLoadContext,System.String)">
+            <summary>
+            This method compiles a class and hands back a
+            dynamic reference to that class that you can
+            call members on.
+            </summary>
+            <param name="code">Fully self-contained C# class</param>
+            <param name="cacheHash">Optional hash for disk cache lookup</param>
+            <param name="loadContext">Optional AssemblyLoadContext for loading the assembly</param>
+            <param name="scriptName">Optional script name for cache file naming</param>
+            <returns>Instance of that class or null</returns>
+        </member>
+        <member name="M:Skua.Core.Compiler.CompileAssembly(System.String,System.Boolean)">
+            <summary>
+            <para>
+            Compiles a class and creates an assembly from the compiled class.</para>
+            <para>
+            Assembly is stored on the `.Assembly` property. Use `noLoad()`
+            to bypass loading of the assembly
+            </para>
+            <para>Must include parameterless ctor()</para>
+            </summary>
+            <param name="source">Source code</param>
+            <param name="noLoad">if set doesn't load the assembly (useful only when OutputAssembly is set)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Skua.Core.Compiler.ClearAssemblyCache">
+            <summary>
+            Clears the cached assemblies to free memory
+            </summary>
+        </member>
+        <member name="T:Skua.Core.GameProxy.CaptureProxy">
+            <inheritdoc/>
+        </member>
+        <member name="F:Skua.Core.GameProxy.CaptureProxy.DefaultPort">
+            <summary>
+            The default port for the capture proxy to run on.
+            </summary>
+        </member>
+        <member name="P:Skua.Core.GameProxy.CaptureProxy.Running">
+            <inheritdoc cref="F:Skua.Core.GameProxy.CaptureProxy._running"/>
+        </member>
+        <member name="T:Skua.Core.Models.ProcessInfo">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Models.ProcessInfo.AccountName">
+            <inheritdoc cref="F:Skua.Core.Models.ProcessInfo._accountName"/>
+        </member>
+        <member name="M:Skua.Core.Options.Option`1.#ctor(System.String,System.String,System.String,`0,System.Boolean)">
+            <summary>
+            Constructs an option definition with the given attributes.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Options.OptionContainer.ToEnumText(System.String)">
+            <summary>
+            Turns enum option text (as saved or as shown, spaces for underscores) into text <see cref="M:System.Enum.Parse(System.Type,System.String)"/>
+            accepts: each comma-separated name is trimmed and its inner spaces become underscores, so a flags value such as
+            "A, B" keeps its separator.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Plugins.PluginManager.Unload(Skua.Core.Interfaces.ISkuaPlugin)">
+            <summary>
+            Unloads the given plugin.
+            </summary>
+            <param name="plugin">The plugin to unload.</param>
+        </member>
+        <member name="M:Skua.Core.Plugins.PluginManager.Unload(System.String)">
+            <summary>
+            Unloads the plugin by it's given name.
+            </summary>
+            <param name="pluginName">The name o the plugin to unload.</param>
+        </member>
+        <member name="M:Skua.Core.Plugins.PluginManager.GetContainer(Skua.Core.Interfaces.ISkuaPlugin)">
+            <summary>
+            Gets the container for the given plugin.
+            </summary>
+            <param name="plugin">The plugin to get the container for.</param>
+            <returns>The plugin's container.</returns>
+        </member>
+        <member name="M:Skua.Core.Plugins.PluginManager.GetContainer(System.String)">
+            <summary>
+            Gets the container for the given plugin name.
+            </summary>
+            <param name="pluginName">Name of the plugin to get the container for.</param>
+            <returns>The plugin's container</returns>
+        </member>
+        <member name="M:Skua.Core.Plugins.PluginManager.GetContainer``1">
+            <summary>
+            Gets the container for the plugin with the given type.
+            </summary>
+            <typeparam name="T">The type of the plugin to get the container for.</typeparam>
+            <returns>The container for the plugin with the given type.</returns>
+        </member>
+        <member name="T:Skua.Core.Scripts.Helpers.UltraBossHelper">
+            <summary>
+            Helper for managing ultra boss mechanics
+            </summary>
+        </member>
+        <member name="T:Skua.Core.Scripts.ScriptBoost">
+            <inheritdoc/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._useClassBoost">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.UseClassBoost"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._classBoostID">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.ClassBoostID"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._useExperienceBoost">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.UseExperienceBoost"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._experienceBoostID">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.ExperienceBoostID"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._useGoldBoost">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.UseGoldBoost"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._goldBoostID">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.GoldBoostID"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._useReputationBoost">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.UseReputationBoost"/>
+        </member>
+        <member name="F:Skua.Core.Scripts.ScriptBoost._reputationBoostID">
+            <inheritdoc cref="P:Skua.Core.Interfaces.IScriptBoost.ReputationBoostID"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.UseClassBoost">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._useClassBoost"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.ClassBoostID">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._classBoostID"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.UseExperienceBoost">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._useExperienceBoost"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.ExperienceBoostID">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._experienceBoostID"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.UseGoldBoost">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._useGoldBoost"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.GoldBoostID">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._goldBoostID"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.UseReputationBoost">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._useReputationBoost"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBoost.ReputationBoostID">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBoost._reputationBoostID"/>
+        </member>
+        <member name="T:Skua.Core.Scripts.ScriptBotStats">
+            <inheritdoc/>
+        </member>
+        <member name="M:Skua.Core.Scripts.ScriptBotStats.UpdateGameplaySnapshot(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Updates live gameplay metrics from the current player snapshot. Positive XP deltas and net gold balance changes,
+            including spending, are counted. Game-event counters work without a running script.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Scripts.ScriptBotStats.RecordItemPickup(System.Int32)">
+            <summary>
+            Records item quantity only after the server confirms a successful pickup. This avoids counting inventory
+            refreshes and the separate addItems/getDrop notifications as multiple pickups.
+            </summary>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.Kills">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._kills"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.QuestsAccepted">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._questsAccepted"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.QuestsCompleted">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._questsCompleted"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.Deaths">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._deaths"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.Relogins">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._relogins"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.Drops">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._drops"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.InventorySpace">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._inventorySpace"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.InventoryFilledSpace">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._inventoryFilledSpace"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.InventoryFreeSpace">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._inventoryFreeSpace"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.BankSpace">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._bankSpace"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.BankFilledSpace">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._bankFilledSpace"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.BankFreeSpace">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._bankFreeSpace"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.Time">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._time"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.SessionTime">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._sessionTime"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ExperienceProgress">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._experienceProgress"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ExperienceProgressText">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._experienceProgressText"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.IsMaxLevel">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._isMaxLevel"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.IsLevelProgressVisible">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._isLevelProgressVisible"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ClassRank10Progress">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._classRank10Progress"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ClassRank10ProgressText">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._classRank10ProgressText"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ExperiencePerHour">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._experiencePerHour"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.GoldPerHour">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._goldPerHour"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.KillsPerMinute">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._killsPerMinute"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.DeathsPerMinute">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._deathsPerMinute"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ItemsPerHour">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._itemsPerHour"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.CurrentClassPoints">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._currentClassPoints"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.CurrentClassRank">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._currentClassRank"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.IsMaxClassRank">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._isMaxClassRank"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.IsClassRankProgressVisible">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._isClassRankProgressVisible"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.ClassPointsPerHour">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._classPointsPerHour"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.TimeToLevel">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._timeToLevel"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptBotStats.TimeToClassRank10">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptBotStats._timeToClassRank10"/>
+        </member>
+        <member name="T:Skua.Core.Scripts.ScriptDrop">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptDrop.Interval">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptDrop._interval"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptDrop.RejectElse">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptDrop._rejectElse"/>
+        </member>
+        <member name="M:Skua.Core.Scripts.ScriptInterface.CheckStuckonLoading(System.Int32,System.String)">
+            <summary>
+            Checks if the player is stuck in the loading screen.
+            </summary>
+            <param name="lastConnChange">Last time the loading message changed.</param>
+            <param name="lastConnDetail">Last loading message.</param>
+            <returns>The last loading message and its time</returns>
+        </member>
+        <member name="M:Skua.Core.Scripts.ScriptInterface.RunScriptHandlers">
+            <summary>
+            Run all registered handlers, if the handler returns <see langword="false"/> it is removed from the list.
+            </summary>
+        </member>
+        <member name="T:Skua.Core.Scripts.ScriptManager">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptManager.ScriptRunning">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptManager._scriptRunning"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptManager.LoadedScript">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptManager._loadedScript"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptManager.CompiledScript">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptManager._compiledScript"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptMap.RoomNumber">
+            <summary>
+            Gets the numeric room number from the server-assigned current area name.
+            Returns 0 when the area name is unavailable or does not end in a numeric room suffix.
+            </summary>
+        </member>
+        <member name="T:Skua.Core.Scripts.ScriptOption">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.AttackWithoutTarget">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._attackWithoutTarget"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.RestPackets">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._restPackets"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.SafeTimings">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._safeTimings"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.PrivateRooms">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._privateRooms"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.AggroMonsters">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._aggroMonsters"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.AggroAllMonsters">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._aggroAllMonsters"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.AutoRelogin">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._autoRelogin"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.AutoReloginAny">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._autoReloginAny"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.RetryRelogin">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._retryRelogin"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.SafeRelogin">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._safeRelogin"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.ReloginFallback">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._reloginFallback"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.HeadlessMode">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._headlessMode"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.UseFunctionBasedSkills">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._useFunctionBasedSkills"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.LoadTimeout">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._loadTimeout"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.HuntDelay">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._huntDelay"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.HuntBuffer">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._huntBuffer"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.MaximumTries">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._maximumTries"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.ActionDelay">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._actionDelay"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.PrivateNumber">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._privateNumber"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.JoinMapTries">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._joinMapTries"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.QuestAcceptAndCompleteTries">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._questAcceptAndCompleteTries"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.ReloginTries">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._reloginTries"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.ReloginTryDelay">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._reloginTryDelay"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.LoginTimeout">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._loginTimeout"/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptOption.HuntPriority">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptOption._HuntPriority"/>
+        </member>
+        <member name="M:Skua.Core.Scripts.ScriptOption.OnHeadlessModeChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:Skua.Core.Scripts.ScriptOption.HeadlessMode"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Skua.Core.Scripts.ScriptOption.HeadlessMode"/> is changed.</remarks>
+        </member>
+        <member name="T:Skua.Core.Scripts.ScriptServers">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Scripts.ScriptServers.CachedServers">
+            <inheritdoc cref="F:Skua.Core.Scripts.ScriptServers._cachedServers"/>
+        </member>
+        <member name="T:Skua.Core.Services.AuraMonitorService">
+            <summary>
+            Service that monitors aura changes and publishes events.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Services.DiscordWebhookService.BuildDashboardSnapshotFields">
+            <summary>
+            Builds a compact snapshot for the local dashboard using the existing VibeSkua scripting interfaces.
+            </summary>
+            <returns>Webhook fields containing current character, equipment, and active quest data.</returns>
+        </member>
+        <member name="T:Skua.Core.Services.GetScriptsService">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Services.GetScriptsService.Scripts">
+            <inheritdoc cref="F:Skua.Core.Services.GetScriptsService._scripts"/>
+        </member>
+        <member name="T:Skua.Core.Services.MapService">
+            <inheritdoc/>
+        </member>
+        <member name="P:Skua.Core.Services.MapService.UsePrivateRoom">
+            <inheritdoc cref="F:Skua.Core.Services.MapService._UsePrivateRoom"/>
+        </member>
+        <member name="P:Skua.Core.Services.MapService.PrivateRoomNumber">
+            <inheritdoc cref="F:Skua.Core.Services.MapService._PrivateRoomNumber"/>
+        </member>
+        <member name="T:Skua.Core.Services.RemoteActionResult">
+            <summary>
+            Strongly-typed action result returned by RemoteControlService endpoints.
+            </summary>
+        </member>
+        <member name="T:Skua.Core.Services.RemoteControlService">
+            <summary>
+            Embedded HTTP REST server and remote controller for VibeSkua.
+            Allows Android mobile controllers, web browsers, and LAN dashboards to monitor and operate the bot.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Services.ScriptStartupUpdater.DownloadMissingAndOutdatedAsync(Skua.Core.Interfaces.IGetScriptsService,Skua.Core.Interfaces.IDialogService)">
+            <summary>
+            Downloads every missing or outdated script and tells the user if some could not be downloaded.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Services.UnifiedSettingsService.ReadSettingsFile">
+            <summary>
+            Reads and normalizes the settings file; null when it holds no settings object. Throws on a read or parse
+            error. Call with the file mutex held.
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Services.UnifiedSettingsService.TryReloadSettings">
+            <summary>
+            Re-reads the settings file so changes other VibeSkua processes saved are seen. On a read or parse error the
+            settings in memory are kept and false is returned: falling back to defaults here would let the next save
+            write those defaults over the user's file. A missing file counts as success (memory is all there is).
+            </summary>
+        </member>
+        <member name="M:Skua.Core.Services.UnifiedSettingsService.TryUpdate``1(System.String,``0,System.Func{``0,``0},``0@)">
+            <summary>
+            Reloads, changes and saves one setting as a single step under the cross-process file mutex, so a value
+            several processes edit (a shared list) never loses another process's change made in between. Returns false,
+            and writes nothing, when the reload fails; false too when the save fails (memory then keeps the old value).
+            <paramref name="change"/> must return a new value rather than modify the one it is given.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Running">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Running" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AccountName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AccountName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UseClassBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UseClassBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClassBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClassBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UseExperienceBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UseExperienceBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExperienceBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExperienceBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UseGoldBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UseGoldBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.GoldBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "GoldBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UseReputationBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UseReputationBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReputationBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReputationBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Kills">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Kills" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.QuestsAccepted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "QuestsAccepted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.QuestsCompleted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "QuestsCompleted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Deaths">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Deaths" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Relogins">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Relogins" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Drops">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Drops" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InventorySpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InventorySpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InventoryFilledSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InventoryFilledSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InventoryFreeSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InventoryFreeSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BankSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BankSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BankFilledSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BankFilledSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BankFreeSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BankFreeSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Time">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Time" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SessionTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SessionTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExperienceProgress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExperienceProgress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExperienceProgressText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExperienceProgressText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsMaxLevel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsMaxLevel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLevelProgressVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLevelProgressVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClassRank10Progress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClassRank10Progress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClassRank10ProgressText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClassRank10ProgressText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExperiencePerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExperiencePerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.GoldPerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "GoldPerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.KillsPerMinute">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "KillsPerMinute" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DeathsPerMinute">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DeathsPerMinute" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ItemsPerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ItemsPerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentClassPoints">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentClassPoints" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentClassRank">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentClassRank" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsMaxClassRank">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsMaxClassRank" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsClassRankProgressVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsClassRankProgressVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClassPointsPerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClassPointsPerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TimeToLevel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TimeToLevel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TimeToClassRank10">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TimeToClassRank10" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Interval">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Interval" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RejectElse">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RejectElse" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ScriptRunning">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ScriptRunning" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LoadedScript">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LoadedScript" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CompiledScript">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CompiledScript" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AttackWithoutTarget">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AttackWithoutTarget" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RestPackets">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RestPackets" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SafeTimings">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SafeTimings" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PrivateRooms">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PrivateRooms" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AggroMonsters">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AggroMonsters" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AggroAllMonsters">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AggroAllMonsters" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AutoRelogin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AutoRelogin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AutoReloginAny">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AutoReloginAny" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RetryRelogin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RetryRelogin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SafeRelogin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SafeRelogin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReloginFallback">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReloginFallback" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HeadlessMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HeadlessMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UseFunctionBasedSkills">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UseFunctionBasedSkills" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LoadTimeout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LoadTimeout" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HuntDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HuntDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HuntBuffer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HuntBuffer" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MaximumTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MaximumTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ActionDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ActionDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PrivateNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PrivateNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.JoinMapTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "JoinMapTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.QuestAcceptAndCompleteTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "QuestAcceptAndCompleteTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReloginTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReloginTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReloginTryDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReloginTryDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LoginTimeout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LoginTimeout" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HuntPriority">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HuntPriority" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CachedServers">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CachedServers" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Scripts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Scripts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UsePrivateRoom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UsePrivateRoom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PrivateRoomNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PrivateRoomNumber" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Running">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Running" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AccountName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AccountName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UseClassBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UseClassBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClassBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClassBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UseExperienceBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UseExperienceBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExperienceBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExperienceBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UseGoldBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UseGoldBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.GoldBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "GoldBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UseReputationBoost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UseReputationBoost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReputationBoostID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReputationBoostID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Kills">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Kills" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.QuestsAccepted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "QuestsAccepted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.QuestsCompleted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "QuestsCompleted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Deaths">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Deaths" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Relogins">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Relogins" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Drops">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Drops" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InventorySpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InventorySpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InventoryFilledSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InventoryFilledSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InventoryFreeSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InventoryFreeSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BankSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BankSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BankFilledSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BankFilledSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BankFreeSpace">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BankFreeSpace" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Time">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Time" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SessionTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SessionTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExperienceProgress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExperienceProgress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExperienceProgressText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExperienceProgressText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsMaxLevel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsMaxLevel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLevelProgressVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLevelProgressVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClassRank10Progress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClassRank10Progress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClassRank10ProgressText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClassRank10ProgressText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExperiencePerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExperiencePerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.GoldPerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "GoldPerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.KillsPerMinute">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "KillsPerMinute" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DeathsPerMinute">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DeathsPerMinute" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ItemsPerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ItemsPerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentClassPoints">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentClassPoints" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentClassRank">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentClassRank" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsMaxClassRank">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsMaxClassRank" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsClassRankProgressVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsClassRankProgressVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClassPointsPerHour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClassPointsPerHour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TimeToLevel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TimeToLevel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TimeToClassRank10">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TimeToClassRank10" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Interval">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Interval" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RejectElse">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RejectElse" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ScriptRunning">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ScriptRunning" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LoadedScript">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LoadedScript" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CompiledScript">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CompiledScript" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AttackWithoutTarget">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AttackWithoutTarget" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RestPackets">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RestPackets" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SafeTimings">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SafeTimings" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PrivateRooms">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PrivateRooms" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AggroMonsters">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AggroMonsters" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AggroAllMonsters">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AggroAllMonsters" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AutoRelogin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AutoRelogin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AutoReloginAny">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AutoReloginAny" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RetryRelogin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RetryRelogin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SafeRelogin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SafeRelogin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReloginFallback">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReloginFallback" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HeadlessMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HeadlessMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UseFunctionBasedSkills">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UseFunctionBasedSkills" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LoadTimeout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LoadTimeout" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HuntDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HuntDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HuntBuffer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HuntBuffer" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MaximumTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MaximumTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ActionDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ActionDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PrivateNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PrivateNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.JoinMapTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "JoinMapTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.QuestAcceptAndCompleteTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "QuestAcceptAndCompleteTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReloginTries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReloginTries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReloginTryDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReloginTryDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LoginTimeout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LoginTimeout" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HuntPriority">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HuntPriority" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CachedServers">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CachedServers" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Scripts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Scripts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UsePrivateRoom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UsePrivateRoom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PrivateRoomNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PrivateRoomNumber" generated properties.</summary>
+        </member>
+    </members>
+</doc>

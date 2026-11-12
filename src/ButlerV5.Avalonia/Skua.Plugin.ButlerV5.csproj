@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>ButlerV5</AssemblyName>
+    <RootNamespace>ButlerV5</RootNamespace>
+    <Version>1.2.7</Version>
+    <!-- What VibeSkua's Directory.Build.props gives the in-repo build, so the DLL matches it. -->
+    <AssemblyVersion>2.1.4</AssemblyVersion>
+    <FileVersion>2.1.4</FileVersion>
+    <NoWarn>$(NoWarn);CS8600;CS8601;CS8602;CS8603;CS8604;CS8605;CS8618;CS8625;CS4014;CS0618;CS0169;CS0414;CS0108;CS8619;CS8620;CS8765;CS0114;CS8609;CS8610;CS0105;CS1591;CS8669;CS0168;CS0162;CS0109;CS0436;CS8714;MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <!-- Versions VibeSkua's Directory.Packages.props pins. VibeSkua ships these, so only compile against them. -->
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.12" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="3.0.0-preview7" />
+  </ItemGroup>
+
+  <!-- VibeSkua bundles these into VibeSkua.dll, so lib\ holds copies from a VibeSkua build.
+       Reference them, never copy them to the output. -->
+  <ItemGroup>
+    <Reference Include="Skua.Core">
+      <HintPath>lib\Skua.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Core.Interfaces">
+      <HintPath>lib\Skua.Core.Interfaces.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Core.Models">
+      <HintPath>lib\Skua.Core.Models.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Core.Utils">
+      <HintPath>lib\Skua.Core.Utils.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Skua.Shared.Avalonia">
+      <HintPath>lib\Skua.Shared.Avalonia.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

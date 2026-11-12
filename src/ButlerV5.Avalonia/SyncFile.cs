@@ -38,6 +38,21 @@ public class SyncData
     /// <summary>Whether this account is mid-park (walking home) - not summonable yet.</summary>
     public bool Parking;
 
+    /// <summary>External player name for the latest one-shot send-all goto command.</summary>
+    public string SendAllTarget = "";
+
+    /// <summary>Unique ID so each recipient executes a broadcast goto command only once.</summary>
+    public string SendAllCommand = "";
+
+    /// <summary>Recipients selected when the broadcast goto command was issued.</summary>
+    public List<string> SendAllRecipients = new();
+
+    /// <summary>UTC ticks when the broadcast goto command was issued.</summary>
+    public long SendAllIssuedUtcTicks;
+
+    /// <summary>File last write time (UTC), populated on read to guard against PID recycling.</summary>
+    public DateTime LastModified { get; set; } = DateTime.MinValue;
+
     public string MapWithRoom => string.IsNullOrEmpty(Room) ? Map : $"{Map}-{Room}";
 
     public string Serialize()
@@ -60,6 +75,10 @@ public class SyncData
         sb.Append("scriptname=").Append(ScriptName).Append('\n');
         sb.Append("declined=").Append(Declined).Append('\n');
         sb.Append("parking=").Append(Parking ? '1' : '0').Append('\n');
+        sb.Append("sendalltarget=").Append(SendAllTarget).Append('\n');
+        sb.Append("sendallcommand=").Append(SendAllCommand).Append('\n');
+        sb.Append("sendallrecipients=").Append(string.Join(",", SendAllRecipients)).Append('\n');
+        sb.Append("sendallissued=").Append(SendAllIssuedUtcTicks).Append('\n');
         return sb.ToString();
     }
 
@@ -104,6 +123,14 @@ public class SyncData
                 case "scriptname": data.ScriptName = value; break;
                 case "declined": data.Declined = value; break;
                 case "parking": data.Parking = value == "1"; break;
+                case "sendalltarget": data.SendAllTarget = value; break;
+                case "sendallcommand": data.SendAllCommand = value; break;
+                case "sendallrecipients":
+                    data.SendAllRecipients = value
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                        .ToList();
+                    break;
+                case "sendallissued": _ = long.TryParse(value, out data.SendAllIssuedUtcTicks); break;
             }
         }
 
@@ -177,9 +204,13 @@ public static class SyncFile
                 if (!File.Exists(path))
                     return null;
 
+                DateTime lastWrite = File.GetLastWriteTimeUtc(path);
                 using FileStream fs = new(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
                 using StreamReader sr = new(fs);
-                return SyncData.Parse(sr.ReadToEnd());
+                SyncData? data = SyncData.Parse(sr.ReadToEnd());
+                if (data != null)
+                    data.LastModified = lastWrite;
+                return data;
             }
             catch (IOException)
             {
@@ -217,14 +248,14 @@ public static class SyncFile
     }
 
     /// <summary>
-    /// No time-based staleness guessing: an account counts as online only if its file
-    /// says loggedin=1 AND the Skua process that wrote it is still running. A crashed
-    /// or task-killed client fails the pid check, a closed client writes loggedin=0.
+    /// An account counts as online only if its file says loggedin=1 AND the Skua process that
+    /// wrote it is still running. Guards against Windows PID recycling (e.g. if the client
+    /// crashed and an unrelated Windows process inherited the PID).
     /// </summary>
     public static bool IsOnline(SyncData data) =>
-        data.LoggedIn && data.Pid > 0 && IsProcessAlive(data.Pid);
+        data.LoggedIn && data.Pid > 0 && IsProcessAlive(data.Pid, data.LastModified > DateTime.MinValue ? data.LastModified : null);
 
-    public static bool IsProcessAlive(int pid)
+    public static bool IsProcessAlive(int pid, DateTime? fileWriteTimeUtc = null)
     {
         try
         {
@@ -232,7 +263,30 @@ public static class SyncFile
             // OS handle on .HasExited. This runs ~10-20x/sec across the fleet; leaving
             // them for the finalizer piles up handles (a slow handle/memory leak).
             using Process process = Process.GetProcessById(pid);
-            return !process.HasExited;
+            if (process.HasExited)
+                return false;
+
+            // Verify process name: Windows recycles PIDs after a crash. If another program
+            // (e.g. RuntimeBroker, svchost, Discord) inherits the PID, it is NOT Skua.
+            string name = process.ProcessName.ToLowerInvariant();
+            if (!name.Contains("skua") && !name.Contains("vibeskua") && name != "dotnet")
+                return false;
+
+            // If the process started after the sync file was written, the PID was recycled to a new process.
+            if (fileWriteTimeUtc.HasValue && fileWriteTimeUtc.Value > DateTime.MinValue)
+            {
+                try
+                {
+                    if (process.StartTime.ToUniversalTime() > fileWriteTimeUtc.Value.AddMinutes(1))
+                        return false;
+                }
+                catch
+                {
+                    // Access denied or unprivileged query
+                }
+            }
+
+            return true;
         }
         catch (ArgumentException)
         {

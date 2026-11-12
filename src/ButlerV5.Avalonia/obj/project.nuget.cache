@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "a84IGUiZOwo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Anonymous\\Documents\\1projects\\claude skua projects\\claude plugins\\ButlerV5\\Skua.Plugin.ButlerV5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Anonymous\\.nuget\\packages\\avalonia\\11.3.12\\avalonia.11.3.12.nupkg.sha512",
+    "C:\\Users\\Anonymous\\.nuget\\packages\\avalonia.buildservices\\11.3.2\\avalonia.buildservices.11.3.2.nupkg.sha512",
+    "C:\\Users\\Anonymous\\.nuget\\packages\\avalonia.remote.protocol\\11.3.12\\avalonia.remote.protocol.11.3.12.nupkg.sha512",
+    "C:\\Users\\Anonymous\\.nuget\\packages\\material.icons\\3.0.0-preview7\\material.icons.3.0.0-preview7.nupkg.sha512",
+    "C:\\Users\\Anonymous\\.nuget\\packages\\material.icons.avalonia\\3.0.0-preview7\\material.icons.avalonia.3.0.0-preview7.nupkg.sha512",
+    "C:\\Users\\Anonymous\\.nuget\\packages\\microcom.runtime\\0.11.0\\microcom.runtime.0.11.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,4 +1,6 @@
-# ButlerV5 Avalonia
+# ⭐ Not updated anymore, only here for archiving reasons and some other reasons. The Avalonia version of ButlerV5 will be updated through VibeSkua client updates ⭐
+
+## ButlerV5 Avalonia
 
 Current public version: **1.2.7**, matching ButlerV5 for WPF.
 
